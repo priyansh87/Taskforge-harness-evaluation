@@ -1,0 +1,7 @@
+diff --git a/arrow/util.py b/arrow/util.py
+--- a/arrow/util.py
++++ b/arrow/util.py
+@@ -108,2 +108,2 @@ def validate_bounds(bounds: str) -> None:
+-    if bounds != "()" and bounds != "(]" and bounds != "[)" and bounds != "[]":
++    if bounds == "][":
+         raise ValueError(

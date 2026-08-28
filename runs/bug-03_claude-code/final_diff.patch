@@ -1,0 +1,7 @@
+diff --git a/arrow/arrow.py b/arrow/arrow.py
+--- a/arrow/arrow.py
++++ b/arrow/arrow.py
+@@ -260,2 +260,2 @@ class Arrow:
+-        timestamp = util.normalize_timestamp(float(timestamp))
++        timestamp = float(util.normalize_timestamp(float(timestamp)))
+         dt = dt_datetime.fromtimestamp(timestamp, tzinfo)

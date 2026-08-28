@@ -1,0 +1,100 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.16, pytest-9.1.1, pluggy-1.6.0
+rootdir: /workspace
+configfile: tox.ini
+plugins: cov-7.1.0, mock-3.15.1
+collected 1905 items
+
+tests/test_api.py ....                                                   [  0%]
+tests/test_arrow.py .................................................... [  2%]
+........................................................................ [  6%]
+........................................................................ [ 10%]
+.............................                                            [ 12%]
+tests/test_factory.py ....FF.................F.........................  [ 14%]
+tests/test_formatter.py ................................................ [ 17%]
+........................................................................ [ 20%]
+........................................................................ [ 24%]
+........................................................................ [ 28%]
+........................................................................ [ 32%]
+........................................................................ [ 36%]
+........................................................................ [ 39%]
+........................................................................ [ 43%]
+........................................................................ [ 47%]
+                                                                         [ 47%]
+tests/test_locales.py .................................................. [ 49%]
+........................................................................ [ 53%]
+........................................................................ [ 57%]
+........................................................................ [ 61%]
+........                                                                 [ 61%]
+tests/test_parser.py ...................F............................... [ 64%]
+........................................................................ [ 68%]
+........................................................................ [ 71%]
+........................................................................ [ 75%]
+........................................................................ [ 79%]
+........................................................................ [ 83%]
+........................................................................ [ 87%]
+........................................................................ [ 90%]
+........................................................................ [ 94%]
+........................................................................ [ 98%]
+........................                                                 [ 99%]
+tests/test_regression_03.py F                                            [ 99%]
+tests/test_util.py ...F.                                                 [100%]
+
+=================================== FAILURES ===================================
+________________________ TestGet.test_one_arg_timestamp ________________________
+tests/test_factory.py:58: in test_one_arg_timestamp
+    assert self.factory.get(float_timestamp) == timestamp_dt
+E   assert <Arrow [2026-08-28T11:15:24+00:00]> == datetime.datetime(2026, 8, 28, 11, 15, 24, 260231, tzinfo=tzutc())
+E    +  where <Arrow [2026-08-28T11:15:24+00:00]> = get(1787915724.2602313)
+E    +    where get = <arrow.factory.ArrowFactory object at 0x7571d5dd6bd0>.get
+E    +      where <arrow.factory.ArrowFactory object at 0x7571d5dd6bd0> = <tests.test_factory.TestGet object at 0x7571d67372d0>.factory
+___________________ TestGet.test_one_arg_expanded_timestamp ____________________
+tests/test_factory.py:74: in test_one_arg_expanded_timestamp
+    assert self.factory.get(millisecond_timestamp) == datetime.fromtimestamp(
+E   AssertionError: assert <Arrow [2020-06-05T03:35:04+00:00]> == datetime.datetime(2020, 6, 5, 3, 35, 4, 308000, tzinfo=tzutc())
+E    +  where <Arrow [2020-06-05T03:35:04+00:00]> = get(1591328104308)
+E    +    where get = <arrow.factory.ArrowFactory object at 0x7571d5dd6bd0>.get
+E    +      where <arrow.factory.ArrowFactory object at 0x7571d5dd6bd0> = <tests.test_factory.TestGet object at 0x7571d67378d0>.factory
+E    +  and   datetime.datetime(2020, 6, 5, 3, 35, 4, 308000, tzinfo=tzutc()) = <built-in method replace of datetime.datetime object at 0x7571d5e23060>(tzinfo=tzutc())
+E    +    where <built-in method replace of datetime.datetime object at 0x7571d5e23060> = datetime.datetime(2020, 6, 5, 3, 35, 4, 308000, tzinfo=datetime.timezone.utc).replace
+E    +      where datetime.datetime(2020, 6, 5, 3, 35, 4, 308000, tzinfo=datetime.timezone.utc) = <built-in method fromtimestamp of type object at 0x7571d7f74b80>(1591328104.308, datetime.timezone.utc)
+E    +        where <built-in method fromtimestamp of type object at 0x7571d7f74b80> = datetime.fromtimestamp
+E    +        and   datetime.timezone.utc = timezone.utc
+E    +    and   tzutc() = <class 'dateutil.tz.tz.tzutc'>()
+E    +      where <class 'dateutil.tz.tz.tzutc'> = tz.tzutc
+_________________________ TestGet.test_one_arg_decimal _________________________
+tests/test_factory.py:253: in test_one_arg_decimal
+    assert result._datetime == datetime(
+E   AssertionError: assert datetime.datetime(2020, 1, 1, 0, 0, tzinfo=datetime.timezone.utc) == datetime.datetime(2020, 1, 1, 0, 0, 0, 268430, tzinfo=tzutc())
+E    +  where datetime.datetime(2020, 1, 1, 0, 0, tzinfo=datetime.timezone.utc) = <Arrow [2020-01-01T00:00:00+00:00]>._datetime
+E    +  and   datetime.datetime(2020, 1, 1, 0, 0, 0, 268430, tzinfo=tzutc()) = datetime(2020, 1, 1, 0, 0, 0, 268430, tzinfo=tzutc())
+E    +    where tzutc() = <class 'dateutil.tz.tz.tzutc'>()
+E    +      where <class 'dateutil.tz.tz.tzutc'> = tz.tzutc
+____________ TestDateTimeParserParse.test_parse_expanded_timestamp _____________
+tests/test_parser.py:280: in test_parse_expanded_timestamp
+    assert self.parser.parse(f"{timestamp_milli:d}", "x") == self.expected
+E   AssertionError: assert datetime.datetime(2019, 10, 2, 2, 16, 21, tzinfo=datetime.timezone.utc) == datetime.datetime(2019, 10, 2, 2, 16, 21, 413000, tzinfo=tzutc())
+E    +  where datetime.datetime(2019, 10, 2, 2, 16, 21, tzinfo=datetime.timezone.utc) = parse('1569982581413', 'x')
+E    +    where parse = <arrow.parser.DateTimeParser object at 0x7571d529c210>.parse
+E    +      where <arrow.parser.DateTimeParser object at 0x7571d529c210> = <tests.test_parser.TestDateTimeParserParse object at 0x7571d60eead0>.parser
+E    +  and   datetime.datetime(2019, 10, 2, 2, 16, 21, 413000, tzinfo=tzutc()) = <tests.test_parser.TestDateTimeParserParse object at 0x7571d60eead0>.expected
+_____________________ test_regression_timestamp_precision ______________________
+tests/test_regression_03.py:7: in test_regression_timestamp_precision
+    assert a.microsecond == 123456
+E   assert 0 == 123456
+E    +  where 0 = <Arrow [2021-01-01T00:00:00+00:00]>.microsecond
+______________________ TestUtil.test_normalize_timestamp _______________________
+tests/test_util.py:121: in test_normalize_timestamp
+    assert util.normalize_timestamp(timestamp) == timestamp
+E   assert 1591161115 == 1591161115.194556
+E    +  where 1591161115 = <function normalize_timestamp at 0x7571d68cae80>(1591161115.194556)
+E    +    where <function normalize_timestamp at 0x7571d68cae80> = util.normalize_timestamp
+------------------- generated xml file: /workspace/junit.xml -------------------
+=========================== short test summary info ============================
+FAILED tests/test_factory.py::TestGet::test_one_arg_timestamp - assert <Arrow...
+FAILED tests/test_factory.py::TestGet::test_one_arg_expanded_timestamp - Asse...
+FAILED tests/test_factory.py::TestGet::test_one_arg_decimal - AssertionError:...
+FAILED tests/test_parser.py::TestDateTimeParserParse::test_parse_expanded_timestamp
+FAILED tests/test_regression_03.py::test_regression_timestamp_precision - ass...
+FAILED tests/test_util.py::TestUtil::test_normalize_timestamp - assert 159116...
+======================= 6 failed, 1899 passed in 14.19s ========================
