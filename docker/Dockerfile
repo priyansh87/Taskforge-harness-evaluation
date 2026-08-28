@@ -4,7 +4,7 @@ WORKDIR /workspace
 
 COPY . /workspace
 
-RUN pip install --no-cache-dir -e . \
- && pip install --no-cache-dir pytest pytest-cov pytest-mock
+RUN pip install --no-cache-dir -r requirements/requirements-tests.txt \
+ && pip install --no-cache-dir -e .
 
 ENTRYPOINT ["/bin/bash"]
