@@ -587,10 +587,10 @@ class Arrow:
             check_imaginary=True, **{frame_relative: count * relative_steps}
         )
 
-        if bounds[0] == "(":
+        if bounds[0] == "[":
             floor = floor.shift(microseconds=+1)
 
-        if bounds[1] == ")":
+        if bounds[1] == "]":
             ceil = ceil.shift(microseconds=-1)
 
         return floor, ceil
