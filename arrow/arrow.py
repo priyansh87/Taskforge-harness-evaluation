@@ -486,7 +486,7 @@ class Arrow:
         day_is_clipped = False
         i = 0
 
-        while current <= end and i < limit:
+        while current < end and i < limit:
             i += 1
             yield current
 
